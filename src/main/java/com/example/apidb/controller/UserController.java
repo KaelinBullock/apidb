@@ -1,5 +1,7 @@
-package com.example.apidb.user;
+package com.example.apidb.controller;
 
+import com.example.apidb.domain.User;
+import com.example.apidb.user.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,5 +1,7 @@
 package com.example.apidb.user;
 
+import com.example.apidb.domain.User;
+import com.example.apidb.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

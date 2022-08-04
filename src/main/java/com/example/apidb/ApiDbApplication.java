@@ -1,6 +1,6 @@
 package com.example.apidb;
 
-import com.example.apidb.user.User;
+import com.example.apidb.domain.User;
 import com.example.apidb.user.UserService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,10 +25,10 @@ public class ApiDbApplication {
 		return args -> {
 			// read JSON and load json
 			ObjectMapper mapper = new ObjectMapper();
-			TypeReference<List<User>> typeReference = new TypeReference<>() {};
+			TypeReference<List<User>> typeReference = new TypeReference<List<User>>(){};
 			InputStream inputStream = TypeReference.class.getResourceAsStream("/json/users.json");
 			try {
-				List<User> users = mapper.readValue(inputStream, typeReference);
+				List<User> users = mapper.readValue(inputStream,typeReference);
 				userService.save(users);
 				System.out.println("Users Saved!");
 			} catch (IOException e){

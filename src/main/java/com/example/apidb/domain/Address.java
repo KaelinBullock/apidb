@@ -1,4 +1,4 @@
-package com.example.apidb.user;
+package com.example.apidb.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
