@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Minny's Mangoes",
+    "location": {
+      "id": 5,
+      "name": "Jamal's location",
+      "street": "Long street",
+      "suite": "8374",
+      "city": "Baltimore",
+      "state": "Maryland",
+      "zipcode": "43329",
+      "timeZone": "CST",
+      "locationType": "BUSINESS",
+      "lat": 32.393939,
+      "lon": 49.393993
+    }
+  },
+  {
+    "id": 2,
+    "name": "Franky's Fish",
+    "location": {
+      "id": 5,
+      "name": "Jamal's location",
+      "street": "Long street",
+      "suite": "8374",
+      "city": "Baltimore",
+      "state": "Maryland",
+      "zipcode": "43329",
+      "timeZone": "CST",
+      "locationType": "BUSINESS",
+      "lat": 32.393939,
+      "lon": 49.393993
+    }
+
+  },
+  {
+    "id": 3,
+    "name": "Yard Dog Danny's",
+    "location": {
+      "id": 5,
+      "name": "Jamal's location",
+      "street": "Long street",
+      "suite": "8374",
+      "city": "Baltimore",
+      "state": "Maryland",
+      "zipcode": "43329",
+      "timeZone": "CST",
+      "locationType": "BUSINESS",
+      "lat": 32.393939,
+      "lon": 49.393993
+    }
+  }
+]
