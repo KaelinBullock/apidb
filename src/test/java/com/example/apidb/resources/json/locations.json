@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Jamal's location",
+    "street": "Long street",
+    "suite": "8374",
+    "city": "Baltimore",
+    "state": "Maryland",
+    "zipcode": "43329",
+    "timeZone": "CST",
+    "locationType": "BUSINESS",
+    "lat": 32.393939,
+    "lon": 49.393993
+  },
+  {
+    "id": 2,
+    "name": "Witherspoon Spoons",
+    "street": "Back street",
+    "suite": "765",
+    "city": "Miami",
+    "state": "Flo-rida",
+    "zipcode": "43329",
+    "timeZone": "CST",
+    "locationType": "BUSINESS",
+    "lat": 74.393939,
+    "lon": 34.393993
+  },
+  {
+    "id": 3,
+    "name": "Holy Moly Mole Removal",
+    "street": "Big street",
+    "suite": "3737",
+    "city": "Denver",
+    "state": "Colorado",
+    "zipcode": "43329",
+    "timeZone": "PST",
+    "locationType": "BUSINESS",
+    "lat": 53.393939,
+    "lon": 79.393993
+  },
+  {
+    "id": 4,
+    "name": "Big Brandon's Storage",
+    "street": "Big street",
+    "suite": "9021",
+    "city": "Las Vegas",
+    "state": "Nevada",
+    "zipcode": "89443",
+    "timeZone": "PST",
+    "locationType": "STORAGE",
+    "lat": 32.393939,
+    "lon": 49.393993
+  }
+]

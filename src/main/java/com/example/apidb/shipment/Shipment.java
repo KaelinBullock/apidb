@@ -19,8 +19,8 @@ public class Shipment {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
     private Long id;
-    private LocalDate creationDate;
-    private LocalDate deliveryDate;
+    private LocalDate creationdate;
+    private LocalDate deliverydate;
 
     @ManyToOne(
             cascade = CascadeType.ALL,

@@ -7,7 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.TimeZone;
 
-@Data
+@Data//remove these data annotations
 @AllArgsConstructor
 @Entity
 @Builder
@@ -22,8 +22,10 @@ public class Location {
     String city;
     String State;
     String zipcode;
-    TimeZone timeZone;
-    LocationType locationType;
+    String timezone;
+    @Enumerated(EnumType.STRING)
+    @Column(name="locationtype")
+    LocationType locationtype;
     double lat;
     double lon;
 

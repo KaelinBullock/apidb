@@ -25,13 +25,16 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
@@ -41,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(classes = {ApiDbApplication.class, H2JpaConfig.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@PropertySource("classpath:/application.properties")
+@TestPropertySource("classpath:/application.properties")
 @ActiveProfiles("test")
 @Slf4j
 public class ShipmentITTests {
@@ -90,25 +93,24 @@ public class ShipmentITTests {
         String port = environment.getProperty("local.server.port");
         ObjectMapper mapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule());
-        TypeReference<List<Contact>> contactList = new TypeReference<List<Contact>>(){};
-        InputStream inputStream = TypeReference.class.getResourceAsStream("/json/contacts.json");
-        List<Contact> contacts;
-        try {
-            contacts = mapper.readValue(inputStream, contactList);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        TypeReference<List<Contact>> contactList = new TypeReference<List<Contact>>(){};
+//        InputStream inputStream = TypeReference.class.getResourceAsStream("/json/contacts.json");
+//        List<Contact> contacts;
+//        try {
+//            contacts = mapper.readValue(inputStream, contactList);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         ;
         Location location = Location.builder()
                 .id(Long.valueOf(7))
                 .city("Fayetteville")
                 .lat(32.33)
                 .lon(37.49)
-                .locationType(LocationType.BUSINESS)
+//                .locationType(LocationType.BUSINESS)
                 .name("Big place")
                 .State("Arkansas").build();
-
-
+        //add entity builder
 
         ResponseEntity<String> responseEntity = this.restTemplate
                 .postForEntity("http://localhost:" + port + "/api/location/save", location, String.class);
@@ -120,6 +122,11 @@ public class ShipmentITTests {
 
 //        ResponseEntity<Location[]> locations = this.restTemplate
 //                .getForEntity("http://localhost:" + port + "/api/contact/list", Location[].class);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, results.getStatusCode());
+        assertEquals(Collections.singletonList(location), results.getBody());
+
         log.info(String.valueOf(results));
 //        log.info(String.valueOf(contacts));
         log.info("");

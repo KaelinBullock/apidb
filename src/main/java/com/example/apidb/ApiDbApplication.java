@@ -24,8 +24,14 @@ import java.util.List;
 @SpringBootApplication
 public class ApiDbApplication {
 
-//	@Value("${json.contact}")
-//	private String contactsJson;
+	@Value("${json.contacts}")
+	private String contactsJson;
+	@Value("${json.locations}")
+	private String locationsJson;
+	@Value("${json.companies}")
+	private String companiesJson;
+	@Value("${json.shipments}")
+	private String shipmentsJson;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiDbApplication.class, args);
@@ -36,43 +42,43 @@ public class ApiDbApplication {
 	//think of things customers might want to query.
 	//what users belong to a company
 	//add error messages
-	@Bean
-	CommandLineRunner runner(ContactService contactService, ShipmentService shipmentService,
-							 LocationService locationService, CompanyService companyService) {
-		return args -> {
-			// read JSON and load json
-			//TODO put the file paths in apllication.properties
-			ObjectMapper mapper = new ObjectMapper()
-					.registerModule(new JavaTimeModule());
-
-			try {
-				TypeReference<List<Contact>> contactList = new TypeReference<List<Contact>>(){};
-				InputStream inputStream = TypeReference.class.getResourceAsStream("/json/contacts.json");
-				List<Contact> contacts = mapper.readValue(inputStream, contactList);
-				contactService.save(contacts);
-
-
-
-				TypeReference<List<Location>> locationList = new TypeReference<List<Location>>(){};
-				inputStream = TypeReference.class.getResourceAsStream("/json/locations.json");
-				List<Location> locations = mapper.readValue(inputStream, locationList);
-				locationService.save(locations);
-
-				TypeReference<List<Company>> companyList = new TypeReference<List<Company>>(){};
-				inputStream = TypeReference.class.getResourceAsStream("/json/companies.json");
-				List<Company> companies = mapper.readValue(inputStream, companyList);;
-				companyService.save(companies);
-
-				//need to fix for tests
-//				TypeReference<List<Shipment>> shipmentList = new TypeReference<List<Shipment>>(){};
-//				inputStream = TypeReference.class.getResourceAsStream("/json/shipments.json");
+//	@Bean
+//	CommandLineRunner runner(ContactService contactService, ShipmentService shipmentService,
+//							 LocationService locationService, CompanyService companyService) {
+//		return args -> {
+//			// read JSON and load json
+//			//TODO put the file paths in apllication.properties
+//			ObjectMapper mapper = new ObjectMapper()
+//					.registerModule(new JavaTimeModule());
+//
+//			try {
+//				TypeReference<List<Contact>> contactList = new TypeReference<List<Contact>>(){};
+//				InputStream inputStream = TypeReference.class.getResourceAsStream(contactsJson);
+//				List<Contact> contacts = mapper.readValue(inputStream, contactList);
+//				contactService.save(contacts);
+//
+//
+//
+//				TypeReference<List<Location>> locationList = new TypeReference<List<Location>>(){};
+//				inputStream = TypeReference.class.getResourceAsStream(locationsJson);
+//				List<Location> locations = mapper.readValue(inputStream, locationList);
+//				locationService.save(locations);
+//
+//				TypeReference<List<Company>> companyList = new TypeReference<List<Company>>(){};
+//				inputStream = TypeReference.class.getResourceAsStream(companiesJson);
+//				List<Company> companies = mapper.readValue(inputStream, companyList);;
+//				companyService.save(companies);
+//
+//				TypeReference<List<Shipment>> shipmentList = new TypeReference<>() {
+//				};
+//				inputStream = TypeReference.class.getResourceAsStream(shipmentsJson);
 //				List<Shipment> shipments = mapper.readValue(inputStream, shipmentList);;
 //				shipmentService.save(shipments);
-
-				System.out.println("Users Saved!");
-			} catch (IOException e){
-				System.out.println("Unable to save users: " + e.getMessage());
-			}
-		};
-	}
+//
+//				System.out.println("Users Saved!");
+//			} catch (IOException e){
+//				System.out.println("Unable to save users: " + e.getMessage());
+//			}
+//		};
+//	}
 }

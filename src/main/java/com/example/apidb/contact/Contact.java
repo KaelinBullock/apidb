@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "contacts")
-public class Contact {
+public class Contact {//TODO go back and add underscores to db tables with two words
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
     Long id;

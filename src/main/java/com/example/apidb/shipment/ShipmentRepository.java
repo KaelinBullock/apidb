@@ -18,8 +18,6 @@ import static org.testng.AssertJUnit.assertNotNull;
 //when updating the shipment pull back the location and update that as well
 //the other option is to fix the query.  To do that we need to map the query to a dto
 
-
-@Repository
 public class ShipmentRepository {
     @PersistenceContext
     private EntityManager entityManager;
@@ -31,8 +29,8 @@ public class ShipmentRepository {
         entityManager.createNativeQuery("INSERT INTO shipments (id, creation_date, delivery_date, contact_id, " +
                         "location_id) VALUES (?,?,?,?, ?)")
                 .setParameter(1, findLastEntry())
-                .setParameter(2, shipment.getCreationDate())
-                .setParameter(3, shipment.getDeliveryDate())
+                .setParameter(2, shipment.getCreationdate())
+                .setParameter(3, shipment.getDeliverydate())
                 .setParameter(4, contactId)
                 .setParameter(5, locationId)
                 .executeUpdate();

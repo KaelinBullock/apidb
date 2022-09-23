@@ -2,6 +2,8 @@ package com.example.apidb.location;
 
 import com.example.apidb.location.Location;
 import com.example.apidb.location.LocationRepository;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.Optional;
 public class LocationService {
 
     private final LocationRepository locationRepository;
-
+    @Autowired
     public LocationService(LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
     }
