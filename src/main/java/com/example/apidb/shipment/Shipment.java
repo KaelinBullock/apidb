@@ -1,15 +1,13 @@
 package com.example.apidb.shipment;
 
 import com.example.apidb.contact.Contact;
-import com.example.apidb.location.Location;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Builder
 @Entity
@@ -19,18 +17,10 @@ public class Shipment {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
     private Long id;
-    private LocalDate creationdate;
-    private LocalDate deliverydate;
-
-    @ManyToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-            name = "location_id",
-            referencedColumnName = "id"
-    )
-    private Location location;
+    @Column(name="creation_date")
+    private LocalDate creationDate;
+    @Column(name="delivery_date")
+    private LocalDate deliveryDate;
 
     @ManyToOne(
             cascade = CascadeType.ALL

@@ -1,14 +1,15 @@
 package com.example.apidb;
 
-import com.example.apidb.company.Company;
 import com.example.apidb.company.CompanyRepository;
+import com.example.apidb.contact.Contact;
 import com.example.apidb.contact.ContactRepository;
 import com.example.apidb.location.*;
+import com.example.apidb.shipment.Shipment;
 import com.example.apidb.shipment.ShipmentRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,66 +24,82 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.apidb.TestHelper.mapper;
+import static com.example.apidb.TestHelper.getTestContact;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class LocationIT {
+public class ShipmentIT {
 
-    @Value("${json.locations}")
-    private String locationsJson;
+    @Value("${json.shipments}")
+    String shipmentsJson;
 
     @Autowired
-    TestRestTemplate restTemplate;
-    @Autowired
-    LocationRepository locationRepository;
-
-    @MockBean
     CompanyRepository companyRepository;
-    @MockBean
+    @Autowired
     ShipmentRepository shipmentRepository;
     @MockBean
     ContactRepository contactRepository;
+    @Autowired
+    LocationRepository locationRepository;
 
     @LocalServerPort
     private int port;
+    @Autowired
+    TestRestTemplate restTemplate;
     HttpHeaders headers = new HttpHeaders();
-    List<Location> locationList = new ArrayList<>();
+    List<Shipment> shipmentList = new ArrayList<>();
+    ObjectMapper mapper = new ObjectMapper()
+					.registerModule(new JavaTimeModule());
 
     @BeforeEach
     public void setup() {
-        TypeReference<List<Location>> locationsRef = new TypeReference<>() {};
-        InputStream inputStream = TypeReference.class.getResourceAsStream(locationsJson);
+
+        ResponseEntity<List<Shipment>> results = restTemplate.exchange("http://localhost:" + port + "/api/shipment/list",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                });
+
+        shipmentList = results.getBody();
+        TypeReference<List<Shipment>> shipments = new TypeReference<>() {};
+        InputStream inputStream = TypeReference.class.getResourceAsStream(shipmentsJson);
         try {
-            locationList = mapper.readValue(inputStream, locationsRef);
+            shipmentList = mapper.readValue(inputStream, shipments);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testGetLocation() {
+    public void testGetShipment() {
 
-        ResponseEntity<Location> results = restTemplate.exchange("http://localhost:" + port + "/api/location?id=99",
+        ObjectMapper mapper = new ObjectMapper()
+                .registerModule(new JavaTimeModule());
+
+        ResponseEntity<Shipment> results = restTemplate.exchange("http://localhost:" + port + "/api/shipment?id=99",
                 HttpMethod.GET,
                 null,
-                Location.class);
+                Shipment.class);
 
         assertNotNull(results);
         assertEquals(HttpStatus.OK, results.getStatusCode());
-        assertEquals(locationList.get(2), results.getBody());
+        assertEquals(shipmentList.get(2), results.getBody());
     }
 
     @Test
-    public void testGetLocations() {
+    public void testGetShipments() {
 
-        ResponseEntity<List<Location>> results = restTemplate.exchange("http://localhost:" + port + "/api/location/list",
+        ResponseEntity<List<Shipment>> results = restTemplate.exchange("http://localhost:" + port + "/api/shipment/list",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -94,54 +111,50 @@ public class LocationIT {
     }
 
     @Test
-    public void testSaveLocation() {
+    public void testSaveShipment() {
 
-        Location location = Location.builder()
-                .id(Long.valueOf(1))
-                .city("Fayetteville")
-                .street("street")
-                .zipcode("zipcode")
-                .suite("suite")
-                .lat(32.33)
-                .lon(37.49)
-                .name("Big place")
-                .timeZone("CST")
-                .locationType(LocationType.BUSINESS)
-                .State("Arkansas").build();
+        Shipment shipment = Shipment.builder()
+                .id(Long.valueOf(100))
+                .contact(getTestContact())
+                .deliveryDate(LocalDate.now())
+                .creationDate(LocalDate.of(11, 11, 11))
+                .build();
 
         ResponseEntity<String> responseEntity = this.restTemplate
-                .postForEntity("http://localhost:" + port + "/api/location/save", location, String.class);
+                .postForEntity("http://localhost:" + port + "/api/shipment/save", shipment, String.class);
 
-        ResponseEntity<List<Location>> results = restTemplate.exchange("http://localhost:" + port + "/api/location/list",
+        ResponseEntity<List<Shipment>> results = restTemplate.exchange("http://localhost:" + port + "/api/shipment/list",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
                 });
 
-        locationList.add(0, location);
+        shipmentList.add(shipment);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
         assertEquals(4, results.getBody().size());
-        assertEquals(locationList, results.getBody());
+        assertThat(results.getBody(), samePropertyValuesAs(shipmentList));
     }
     @Test
-    public void testSaveLocation_nullValues() {
+    public void testSaveShipment_nullValues() {
 
-        Location location = Location.builder().id(Long.valueOf(2)).build();
+        Shipment shipment = Shipment.builder().id(Long.valueOf(100))
+                .build();
 
         ResponseEntity<String> responseEntity = this.restTemplate
-                .postForEntity("http://localhost:" + port + "/api/location/save", location, String.class);
+                .postForEntity("http://localhost:" + port + "/api/shipment/save", shipment, String.class);
 
-        ResponseEntity<List<Location>> results = restTemplate.exchange("http://localhost:" + port + "/api/location/list",
+        ResponseEntity<List<Shipment>> results = restTemplate.exchange("http://localhost:" + port + "/api/shipment/list",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
                 });
 
-        locationList.add(0, location);
+        shipmentList.add(shipment);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
-        assertEquals(5, results.getBody().size());
-        assertEquals(locationList, results.getBody());
+        assertEquals(4, results.getBody().size());
+        assertEquals(shipmentList, results.getBody());
     }
+
 }

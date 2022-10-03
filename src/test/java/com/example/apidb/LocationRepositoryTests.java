@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
@@ -21,20 +20,18 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-@TestPropertySource(locations = "classpath:application.yml")
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class LocationRepositoryTests {
 
     private LocationController locationController;
-    private LocationService locationService;
 
     @Autowired
     LocationRepository locationRepository;
 
     @Before
     public void setup() {
-        locationService = new LocationService(locationRepository);
+        LocationService locationService = new LocationService(locationRepository);
         this.locationController = new LocationController(locationService);
     }
 

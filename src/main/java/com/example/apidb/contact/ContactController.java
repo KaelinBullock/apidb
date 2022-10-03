@@ -17,14 +17,13 @@ public class ContactController {
         this.contactService = contactService;
     }
 
-    @GetMapping("/list")
-    public Iterable<Contact> getContacts(@RequestParam Long id) {
-        return contactService.getContacts();
-    }
-
-    @GetMapping("/getContactsById")
+    @GetMapping()
     public Optional<Contact> getContactById(@RequestParam Long id) {
         return contactService.getContactById(id);
+    }
+    @GetMapping("/list")
+    public Iterable<Contact> getContacts() {
+        return contactService.getContacts();
     }
 
     @GetMapping("/getContactsByName")

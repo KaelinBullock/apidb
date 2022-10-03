@@ -7,8 +7,8 @@
     "city": "Baltimore",
     "state": "Maryland",
     "zipcode": "43329",
-    "timeZone": "CST",
-    "locationType": "BUSINESS",
+    "time_zone": "CST",
+    "location_type": "BUSINESS",
     "lat": 32.393939,
     "lon": 49.393993
   },
@@ -20,8 +20,8 @@
     "city": "Miami",
     "state": "Flo-rida",
     "zipcode": "43329",
-    "timeZone": "CST",
-    "locationType": "BUSINESS",
+    "time_zone": "CST",
+    "location_type": "BUSINESS",
     "lat": 74.393939,
     "lon": 34.393993
   },
@@ -33,8 +33,8 @@
     "city": "Denver",
     "state": "Colorado",
     "zipcode": "43329",
-    "timeZone": "PST",
-    "locationType": "BUSINESS",
+    "time_zone": "PST",
+    "location_type": "BUSINESS",
     "lat": 53.393939,
     "lon": 79.393993
   },
@@ -46,8 +46,8 @@
     "city": "Las Vegas",
     "state": "Nevada",
     "zipcode": "89443",
-    "timeZone": "PST",
-    "locationType": "STORAGE",
+    "time_zone": "PST",
+    "location_type": "STORAGE",
     "lat": 32.393939,
     "lon": 49.393993
   }

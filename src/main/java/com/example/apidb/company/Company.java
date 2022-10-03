@@ -1,15 +1,16 @@
 package com.example.apidb.company;
 
 import com.example.apidb.location.Location;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 @Table(name = "companies")
+@Builder
 public class Company {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )

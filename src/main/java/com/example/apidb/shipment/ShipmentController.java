@@ -11,14 +11,14 @@ import java.util.Optional;
 @Slf4j
 public class ShipmentController {
 
-    private ShipmentService shipmentService;
+    private final ShipmentService shipmentService;
 
     public ShipmentController(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
     }
 
-    @GetMapping("/shipment")
-    public Optional getShipement(@RequestParam Long id) {
+    @GetMapping()
+    public Shipment getShipment(@RequestParam Long id) {
         return shipmentService.getShipment(id);
     }
 

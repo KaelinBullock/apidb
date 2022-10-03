@@ -16,7 +16,7 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public Optional<Company> getCompanyById(@RequestParam Long id) {
         return companyService.getCompany(id);
     }

@@ -1,13 +1,11 @@
 package com.example.apidb.location;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.TimeZone;
 
-@Data//remove these data annotations
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 @Builder
@@ -22,10 +20,11 @@ public class Location {
     String city;
     String State;
     String zipcode;
-    String timezone;
+    @Column(name="time_zone")
+    String timeZone;
     @Enumerated(EnumType.STRING)
-    @Column(name="locationtype")
-    LocationType locationtype;
+    @Column(name="location_type")
+    LocationType locationType;
     double lat;
     double lon;
 

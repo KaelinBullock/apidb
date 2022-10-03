@@ -1,24 +1,24 @@
 [
   {
     "id": 2,
-    "creationDate": "2014-12-20T02:30",
-    "deliveryDate": "2014-12-20T02:30",
+    "creation_date": "2014-12-20T02:30",
+    "delivery_date": "2014-12-20T02:30",
     "location": {
       "id": 5
     }
   },
   {
     "id": 3,
-    "creationDate": "2015-11-20T02:30",
-    "deliveryDate": "2015-11-20T02:30",
+    "creation_date": "2015-11-20T02:30",
+    "delivery_date": "2015-11-20T02:30",
     "location": {
       "id": 7
     }
   },
   {
     "id": 4,
-    "creationDate": "2016-08-20T02:30",
-    "deliveryDate": "2016-08-20T02:30",
+    "creation_date": "2016-08-20T02:30",
+    "delivery_date": "2016-08-20T02:30",
     "location": {
       "id": 8
     }

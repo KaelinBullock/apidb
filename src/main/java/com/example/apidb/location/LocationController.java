@@ -23,9 +23,6 @@ public class LocationController {
 
     @GetMapping("/list")
     public Iterable<Location> getLocations() {
-//        List<Location> locations =
-//                StreamSupport.stream(locationService.getLocations().spliterator(), false)
-//                        .collect(Collectors.toList());
         return locationService.getLocations();
     }
 
