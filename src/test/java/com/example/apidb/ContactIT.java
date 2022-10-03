@@ -82,7 +82,7 @@ public class ContactIT {
                 Contact.class);
 
         assertEquals(HttpStatus.OK, results.getStatusCode());
-        Assert.assertNotNull(results);
+        assertNotNull(results);
         assertEquals(contactList.get(2), results.getBody());
     }
 
@@ -103,7 +103,7 @@ public class ContactIT {
     public void saveContactTest() {
 
         Contact contact = Contact.builder()
-                .id(Long.valueOf(1))
+                .id(1L)
                 .company(getTestCompany())
                 .name("quint").build();
 
