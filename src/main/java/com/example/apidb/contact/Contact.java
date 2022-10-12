@@ -12,13 +12,13 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "contacts")
-public class Contact {//TODO go back and add underscores to db tables with two words
+public class Contact {
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     Long id;
     String name;
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(
             name = "company_id",

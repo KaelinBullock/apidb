@@ -22,18 +22,30 @@ public class ShipmentController {
         return shipmentService.getShipment(id);
     }
 
+    @GetMapping("/getShipmentByLocationId")
+    public Iterable<Shipment> getShipmentsByLocationId(@RequestParam Long id) {
+        return shipmentService.getShipmentsByLocationId(id);
+    }
+
+    @GetMapping("/getShipmentsByContactId")
+    public Iterable<Shipment> getShipmentsByContactId(@RequestParam Long id) {
+        return shipmentService.getShipmentsByContactId(id);
+    }
+
     @GetMapping("/list")
     public Iterable<Shipment> list() {
         return shipmentService.getShipments();
     }
 
-    @PostMapping("/saveAll")
-    public void save(@RequestBody List<Shipment> shipments) {
-        shipmentService.save(shipments);
-    }
 
+    //TODO do not allow users to submit a id.  Create a separate function for update
     @PostMapping("/save")
     public void save(@RequestBody Shipment shipment) {
         shipmentService.save(shipment);
+    }
+
+    @PostMapping("/saveAll")
+    public void save(@RequestBody List<Shipment> shipments) {
+        shipmentService.save(shipments);
     }
 }

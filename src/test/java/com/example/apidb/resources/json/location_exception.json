@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "name": "USA",
+  "street": "The street",
+  "suite": "656",
+  "city": "Big cityttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+  "zipcode": "338487",
+  "timeZone": "CST",
+  "locationType": "BUSINESS",
+  "lat": "23.23",
+  "lon": 23.23,
+  "state": "Big state"
+}

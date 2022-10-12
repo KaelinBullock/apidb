@@ -3,6 +3,7 @@ package com.example.apidb.company;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,12 +28,18 @@ public class CompanyController {
     }
 
     @GetMapping("/getCompaniesByName")
-    public Iterable<Company> getCompaniesByName(String companyName) {
-        return companyService.getCompaniesByName(companyName);
+    public Iterable<Company> getCompaniesByName(@RequestParam String name) {
+        return companyService.getCompaniesByName(name);
     }
 
+    //TODO add function to save values lowercase, or just ignore case when searching, so you can search without case mattering also make  names unique
     @PostMapping("/save")
     public void save(@RequestBody Company company) {
         companyService.save(company);
+    }
+
+    @PostMapping("/saveAll")
+    public void save(@RequestBody List<Company> companies) {
+        companyService.save(companies);
     }
 }

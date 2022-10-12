@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,12 +33,17 @@ public class ContactController {
     }
 
     @GetMapping("/getContactsByCompanyId")
-    public Iterable<Contact> getContactsByName(@RequestParam Long companyId) {
-        return contactService.getContactByCompanyId(companyId);
+    public Iterable<Contact> getContactsByName(@RequestParam Long id) {
+        return contactService.getContactByCompanyId(id);
     }
 
     @PostMapping("/save")
     public void save(@RequestBody Contact contact) {
         contactService.save(contact);
+    }
+
+    @PostMapping("/saveAll")
+    public void save(@RequestBody List<Contact> contacts) {
+        contactService.save(contacts);
     }
 }

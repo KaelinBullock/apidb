@@ -8,15 +8,10 @@ public enum LocationType {
     RESIDENTIAL("RESIDENTIAL"),
     STORAGE("STORAGE");
 
-    private String type;
+    public final String type;
 
     LocationType (String type) {
-        type = type;
-    }
-
-
-    public String getType() {
-        return this.type;
+        this.type = type;
     }
 
     public static Optional<LocationType> fromText(String type) {

@@ -1,7 +1,5 @@
 package com.example.apidb.company;
 
-import com.example.apidb.contact.Contact;
-import com.example.apidb.contact.ContactRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

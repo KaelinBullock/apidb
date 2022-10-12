@@ -21,6 +21,13 @@ public class ShipmentService {
         return (Shipment) shipmentRepository.find(id).orElse(null);
     }
 
+    public Iterable<Shipment> getShipmentsByLocationId(Long id) {
+        return shipmentRepository.findShipmentsByLocationId(id);
+    }
+
+    public Iterable<Shipment> getShipmentsByContactId(Long id) {
+        return shipmentRepository.findShipmentsByContactId(id);
+    }
     public void save(Shipment shipment) {
         shipmentRepository.saveShipment(shipment);
     }

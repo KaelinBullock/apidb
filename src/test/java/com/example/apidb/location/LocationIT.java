@@ -1,10 +1,10 @@
-package com.example.apidb;
+package com.example.apidb.location;
 
 import com.example.apidb.company.CompanyRepository;
 import com.example.apidb.contact.ContactRepository;
-import com.example.apidb.location.*;
 import com.example.apidb.shipment.ShipmentRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.apidb.TestHelper.mapper;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,6 +50,7 @@ public class LocationIT {
     private int port;
     HttpHeaders headers = new HttpHeaders();
     List<Location> locationList = new ArrayList<>();
+    ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
     public void setup() {

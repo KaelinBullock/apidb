@@ -1,4 +1,5 @@
-import com.example.apidb.location.LocationType;
+package com.example.apidb.location;
+
 import org.junit.jupiter.api.Test;
 
 import static com.example.apidb.location.LocationType.*;

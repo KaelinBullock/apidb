@@ -1,6 +1,6 @@
 [
   {
-    "id": 69,
+    "id": 1,
     "name": "USA place",
     "street": "The street",
     "suite": "656",
@@ -13,7 +13,7 @@
     "state": "Big state"
   },
   {
-    "id": 89,
+    "id": 2,
     "name": "USA place",
     "street": "The street",
     "suite": "656",
@@ -26,7 +26,7 @@
     "state": "Big state"
   },
   {
-    "id": 99,
+    "id": 3,
     "name": "USA place",
     "street": "The street",
     "suite": "656",

@@ -37,29 +37,24 @@ public class ApiDbApplication {
 		SpringApplication.run(ApiDbApplication.class, args);
 	}
 
-	//write tests
 	//make sure you clean up comments and todos
-	//think of things customers might want to query.
 	//what users belong to a company
 	//add error messages
 	//might want a delete or deactivate
+
 //	@Bean
 //	CommandLineRunner runner(ContactService contactService, ShipmentService shipmentService,
 //							 LocationService locationService, CompanyService companyService) {
+//
 //		return args -> {
 //			// read JSON and load json
-//			//TODO put the file paths in apllication.properties
 //			ObjectMapper mapper = new ObjectMapper()
 //					.registerModule(new JavaTimeModule());
 //
 //			try {
-//				TypeReference<List<Contact>> contactList = new TypeReference<>() {};
-//				InputStream inputStream = TypeReference.class.getResourceAsStream(contactsJson);
-//				List<Contact> contacts = mapper.readValue(inputStream, contactList);
-//				contactService.save(contacts);
 //
 //				TypeReference<List<Location>> locationList = new TypeReference<>() {};
-//				inputStream = TypeReference.class.getResourceAsStream(locationsJson);
+//				InputStream inputStream = TypeReference.class.getResourceAsStream(locationsJson);
 //				List<Location> locations = mapper.readValue(inputStream, locationList);
 //				locationService.save(locations);
 //
@@ -67,6 +62,11 @@ public class ApiDbApplication {
 //				inputStream = TypeReference.class.getResourceAsStream(companiesJson);
 //				List<Company> companies = mapper.readValue(inputStream, companyList);;
 //				companyService.save(companies);
+//
+//				TypeReference<List<Contact>> contactList = new TypeReference<>() {};
+//				inputStream = TypeReference.class.getResourceAsStream(contactsJson);
+//				List<Contact> contacts = mapper.readValue(inputStream, contactList);
+//				contactService.save(contacts);
 //
 //				TypeReference<List<Shipment>> shipmentList = new TypeReference<>() {};
 //				inputStream = TypeReference.class.getResourceAsStream(shipmentsJson);

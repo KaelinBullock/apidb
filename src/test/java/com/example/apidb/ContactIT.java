@@ -4,13 +4,10 @@ import com.example.apidb.company.Company;
 import com.example.apidb.company.CompanyRepository;
 import com.example.apidb.contact.Contact;
 import com.example.apidb.contact.ContactRepository;
-import com.example.apidb.location.Location;
 import com.example.apidb.location.LocationRepository;
 import com.example.apidb.shipment.ShipmentRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +23,12 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.example.apidb.TestHelper.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -56,7 +56,7 @@ public class ContactIT {
     List<Contact> contactList;
 
     @BeforeEach
-    public void setup() {//make sure this only run once
+    public void ContactIT() {
         TypeReference<List<Contact>> companies = new TypeReference<>() {};
         InputStream inputStream = TypeReference.class.getResourceAsStream(contactsJson);
         try {
@@ -76,14 +76,42 @@ public class ContactIT {
             throw new RuntimeException(e);
         }
 
-        ResponseEntity<Contact> results = restTemplate.exchange("http://localhost:" + port + "/api/contact?id=99",
+        ResponseEntity<Contact> results = restTemplate.exchange("http://localhost:" + port + "/api/contact?id=1",
                 HttpMethod.GET,
                 null,
                 Contact.class);
 
         assertEquals(HttpStatus.OK, results.getStatusCode());
         assertNotNull(results);
-        assertEquals(contactList.get(2), results.getBody());
+        assertThat(contactList.get(0)).usingRecursiveComparison().isEqualTo(results.getBody());
+    }
+
+    @Test
+    public void getContactByNameTest() {
+
+        ResponseEntity<List<Contact>> results = restTemplate.exchange("http://localhost:" + port +
+                        "/api/contact/getContactsByName?name=The guy from the gas station",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>(){});
+
+        assertNotNull(results);
+        assertEquals(HttpStatus.OK, results.getStatusCode());
+        assertThat(Collections.singletonList(contactList.get(0))).usingRecursiveComparison().isEqualTo(results.getBody());
+    }
+
+    @Test
+    public void getContactsByCompanyIdTest() {
+
+        ResponseEntity<List<Contact>> results = restTemplate.exchange("http://localhost:" + port +
+                        "/api/contact/getContactsByCompanyId?id=2",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>(){});
+
+        assertNotNull(results);
+        assertEquals(HttpStatus.OK, results.getStatusCode());
+        assertThat(Collections.singletonList(contactList.get(1))).usingRecursiveComparison().isEqualTo(results.getBody());
     }
 
     @Test
@@ -102,11 +130,15 @@ public class ContactIT {
     @Test
     public void saveContactTest() {
 
-        Contact contact = Contact.builder()
-                .id(1L)
+        Contact contact = Contact.builder()//TODO look into  cascade type merge vs merge type all
                 .company(getTestCompany())
                 .name("quint").build();
 
+        ResponseEntity<List<Company>> results1 = restTemplate.exchange("http://localhost:" + port + "/api/company/list",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>(){});
+
         ResponseEntity<String> responseEntity = this.restTemplate
                 .postForEntity("http://localhost:" + port + "/api/contact/save", contact, String.class);
 
@@ -115,20 +147,16 @@ public class ContactIT {
                 null,
                 new ParameterizedTypeReference<>(){});
 
-
-        contactList.add(0, contact);
-
+        List<Contact> resultBody = results.getBody();
+        contact.setId(Long.valueOf(resultBody.size()));
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
-        assertEquals(4, results.getBody().size());
-        assertEquals(contactList, results.getBody());
-    }//how can i make this not order dependent.
-    //I could delete the entry
-    //i couldn't seaerch for the specific contact, because the id could be different,so thats an issue
+        assertThat(resultBody.get(resultBody.size() - 1)).usingRecursiveComparison().isEqualTo(contact);
+    }
 
     @Test
     public void saveContact_nullValuesTest() {
-        Contact contact = Contact.builder().id(Long.valueOf(1)).build();
+        Contact contact = Contact.builder().build();
 
         ResponseEntity<String> responseEntity = this.restTemplate
                 .postForEntity("http://localhost:" + port + "/api/contact/save", contact, String.class);
@@ -138,11 +166,39 @@ public class ContactIT {
                 null,
                 new ParameterizedTypeReference<>(){});
 
-
-        contactList.add(0, contact);
+        List<Contact> resultBody = results.getBody();
+        contact.setId(Long.valueOf(resultBody.size()));
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
-        assertEquals(4, results.getBody().size());
-        assertEquals(contactList, results.getBody());
+        assertThat(resultBody.get(resultBody.size() - 1)).usingRecursiveComparison().isEqualTo(contact);
+    }
+
+    @Test
+    public void testSaveAllContacts() {
+
+        List<Contact> contacts = new ArrayList<>();
+        contacts.add(Contact.builder().name("wiggle")
+                .company(Company.builder().id(1L).build()).build());
+        contacts.add(Contact.builder().name("wobble").build());
+        contacts.add(Contact.builder().name("knobble").build());
+
+        ResponseEntity<String> responseEntity = this.restTemplate
+                .postForEntity("http://localhost:" + port + "/api/contact/saveAll", contacts, String.class);
+
+        ResponseEntity<List<Contact>> results = restTemplate.exchange("http://localhost:" + port + "/api/contact/list",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                });
+
+        List<Contact> resultBody = results.getBody();
+        int bodySize = resultBody.size();
+        contacts.get(0).setId((long) (bodySize - 2));
+        contacts.get(0).setCompany(getTestCompany());
+        contacts.get(1).setId((long) (bodySize - 1));
+        contacts.get(2).setId((long) (bodySize));
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, results.getStatusCode());
+        assertThat(resultBody.subList(bodySize - 3, bodySize)).usingRecursiveComparison().isEqualTo(contacts);
     }
 }

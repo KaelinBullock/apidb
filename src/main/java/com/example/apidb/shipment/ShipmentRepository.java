@@ -9,14 +9,6 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-
-//public interface ShipmentRepository extends CrudRepository<Shipment, Long> {
-//}
-//two options
-//when updating the shipment pull back the location and update that as well
-//the other option is to fix the query.  To do that we need to map the query to a dto
 @Repository
 public class ShipmentRepository {
     @PersistenceContext
@@ -25,8 +17,7 @@ public class ShipmentRepository {
     @Transactional
     public void saveShipment(Shipment shipment) {
         Long contactId = shipment.getContact() != null ? shipment.getContact().getId() : null;
-//need some kind of statment that says if this works or not
-        int result = entityManager.createNativeQuery("INSERT INTO shipments (id, creation_date, delivery_date, " +
+        entityManager.createNativeQuery("INSERT INTO shipments (id, creation_date, delivery_date, " +
                         "contact_id) VALUES (?,?,?,?)")
                 .setParameter(1, findLastEntry())
                 .setParameter(2, shipment.getCreationDate())
@@ -42,7 +33,7 @@ public class ShipmentRepository {
         }
     }
 
-    Long findLastEntry() {//limit results number
+    Long findLastEntry() {
         Iterable<BigInteger> shipmentIds = entityManager.createNativeQuery("SELECT id FROM SHIPMENTS ORDER BY id DESC")
                 .getResultList();
         BigInteger id = shipmentIds.iterator().hasNext() ? shipmentIds.iterator().next() : BigInteger.ZERO;
@@ -52,10 +43,6 @@ public class ShipmentRepository {
     Iterable<Shipment> findAll() {
         return entityManager.createNativeQuery("SELECT *" +
                         "  FROM SHIPMENTS", Shipment.class).getResultList();
-//        return entityManager.createNativeQuery("SELECT s.*\n" +
-//                "  FROM SHIPMENTS s," +
-//                " LOCATIONS l\n" +
-//                "  WHERE s.location_id = l.id", Shipment.class).getResultList();
     }
 
     public Optional find(Long id) {
@@ -66,22 +53,20 @@ public class ShipmentRepository {
                 .setParameter(1, id).getResultList().stream().findFirst();
     }
 
-//    Iterable<Shipment> findShipmentByLocationId(Long id) {
-//        return entityManager.createNativeQuery("SELECT *)\n" +
-//                        "  FROM SHIPMENTS s," +
-//                        " LOCATIONS l" +
-//                        "WHERE l.id = (?1)" +
-//                        "LIMIT 1")
-//                .setParameter(1, id).getResultList();
-//    }
+    Iterable<Shipment> findShipmentsByLocationId(Long id) {
+        return entityManager.createNativeQuery("SELECT *\n" +
+                        "FROM Shipments s\n" +
+                        "JOIN Contacts c ON c.id = s.contact_id\n" +
+                        "JOIN Companies com ON com.id = c.company_id\n" +
+                        "JOIN Locations l ON l.id = com.location_id\n" +
+                        "WHERE l.id = (?1)", Shipment.class)
+                .setParameter(1, id).getResultList();
+    }
 
-    Iterable<Shipment> findShipmentByContactId(Long id) {
-        return entityManager.createNativeQuery("SELECT *)\n" +
-                        "  FROM SHIPMENTS s," +
-                        " LOCATIONS l," +
-                        "CONTACTS c" +
-                        "WHERE c.id = (?1)" +
-                        "LIMIT 1")
+    Iterable<Shipment> findShipmentsByContactId(Long id) {
+        return entityManager.createNativeQuery("SELECT * \n" +
+                        "FROM SHIPMENTS s " +
+                        "WHERE s.contact_id = (?1)", Shipment.class)
                 .setParameter(1, id).getResultList();
     }
 }

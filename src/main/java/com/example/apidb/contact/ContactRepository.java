@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContactRepository extends CrudRepository<Contact, Long> {
 
-    @Query(value = "SELECT c FROM Contacts c WHERE c.name = ?1", nativeQuery = true)
+    @Query(value = "SELECT c.* FROM Contacts c WHERE c.name = ?1", nativeQuery = true)
     Iterable<Contact> getContactByName(String name);
 
-    @Query(value = "SELECT c FROM Contacts c WHERE c.company_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT c.* FROM Contacts c WHERE c.company_id = ?1", nativeQuery = true)
     Iterable<Contact> getContactByCompanyId(Long companyId);
 }

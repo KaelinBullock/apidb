@@ -10,8 +10,8 @@
       "city": "Baltimore",
       "state": "Maryland",
       "zipcode": "43329",
-      "time_zone": "CST",
-      "location_type": "BUSINESS",
+      "timeZone": "CST",
+      "locationType": "BUSINESS",
       "lat": 32.393939,
       "lon": 49.393993
     }
@@ -27,8 +27,8 @@
       "city": "Baltimore",
       "state": "Maryland",
       "zipcode": "43329",
-      "time_zone": "CST",
-      "location_type": "BUSINESS",
+      "timeZone": "CST",
+      "locationType": "BUSINESS",
       "lat": 32.393939,
       "lon": 49.393993
     }
@@ -45,8 +45,8 @@
       "city": "Baltimore",
       "state": "Maryland",
       "zipcode": "43329",
-      "time_zone": "CST",
-      "location_type": "BUSINESS",
+      "timeZone": "CST",
+      "locationType": "BUSINESS",
       "lat": 32.393939,
       "lon": 49.393993
     }

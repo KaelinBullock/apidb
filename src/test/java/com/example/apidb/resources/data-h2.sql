@@ -24,40 +24,40 @@ VALUES ( 'USA place','The street', '656', 'Big city',
         'BUSINESS', 23.23, 23.23);
 
 --Insert Companies---------------
---INSERT INTO companies(
---    company_name, location_id)
---VALUES ('Big Company', 1);
---
---INSERT INTO companies(
---    company_name, location_id)
---VALUES ('Big Company', 2);
---
---INSERT INTO companies(
---    company_name, location_id)
---VALUES ('Big Company', 3);
+INSERT INTO companies(
+    company_name, location_id)
+VALUES ('Big Company', 1);
+
+INSERT INTO companies(
+    company_name, location_id)
+VALUES ('small Company', 2);
+
+INSERT INTO companies(
+    company_name, location_id)
+VALUES ('The Book Store', 3);
 
 --Insert Contacts---------------
---INSERT INTO contacts(
---    name, company_id)
---VALUES ('Jarule', 1);
---
---INSERT INTO contacts(
---    name, company_id)
---VALUES ('Mark Anthony', 2);
---
---INSERT INTO contacts(
---    name, company_id)
---VALUES ('The guy from the gas station', 3);
+INSERT INTO contacts(
+    name, company_id)
+VALUES ('The guy from the gas station', 1);
+
+INSERT INTO contacts(
+    name, company_id)
+VALUES ('Mark Anthony', 2);
+
+INSERT INTO contacts(
+    name, company_id)
+VALUES ('Jarule', 3);
 
 --Insert Shipments---------------
---INSERT INTO shipments(
---    creation_date, delivery_date, contact_id)
---VALUES ('2022-11-11', '2022-11-11', 1);
---
---INSERT INTO shipments(
---    creation_date, delivery_date, contact_id)
---VALUES ('2022-11-11', '2022-11-11', 2);
---
---INSERT INTO shipments(
---    creation_date, delivery_date, contact_id)
---VALUES ('2022-11-11', '2022-11-11', 3);
+INSERT INTO shipments(
+    creation_date, delivery_date, contact_id)
+VALUES ('2022-11-11', '2022-11-11', 1);
+
+INSERT INTO shipments(
+    creation_date, delivery_date, contact_id)
+VALUES ('2022-11-11', '2022-11-11', 2);
+
+INSERT INTO shipments(
+    creation_date, delivery_date, contact_id)
+VALUES ('2022-11-11', '2022-11-11', 3);

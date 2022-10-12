@@ -18,7 +18,6 @@ import static java.lang.Long.*;
 @EnableTransactionManagement
 @ActiveProfiles("test")
 public class TestHelper {
-    //have it read in the json values into lists instead of setting these like this here
 
     static ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule());
@@ -28,7 +27,7 @@ public class TestHelper {
     }
 
     private static final Location testLocation = Location.builder()
-            .id(99L)
+            .id(1L)
             .city("Big city")
             .street("The street")
             .zipcode("338487")
@@ -41,13 +40,13 @@ public class TestHelper {
             .State("Big state").build();
 
     private static final Company testCompany = Company.builder()
-            .id(valueOf(99))
+            .id(1L)
             .name("Big Company")
-            .location(testLocation).build();//why does saving a null location effect location 99
+            .location(testLocation).build();
 
     private static final Contact testContact = Contact.builder()
-            .id(99L)
-            .name("Jarule")
+            .id(1L)
+            .name("The guy from the gas station")
             .company(testCompany).build();
     public static Location getTestLocation() {
         return testLocation;

@@ -6,11 +6,15 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
-//@TestPropertySource("classpath:/application.properties")
 class ApiDbApplicationTests {
-//try deleting resource file again
+
 	@Test
 	void contextLoads() {
+	}
+
+	@Test
+	public void main() {
+		ApiDbApplication.main(new String[] {});
 	}
 
 }
