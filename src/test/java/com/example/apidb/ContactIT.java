@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.example.apidb.TestHelper.*;
+import static com.example.apidb.TestHelper.getTestCompany;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -52,11 +52,11 @@ public class ContactIT {
     @LocalServerPort
     private int port;
 
-    ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
     List<Contact> contactList;
 
     @BeforeEach
-    public void ContactIT() {
+    public void setup() {
         TypeReference<List<Contact>> companies = new TypeReference<>() {};
         InputStream inputStream = TypeReference.class.getResourceAsStream(contactsJson);
         try {
@@ -130,14 +130,9 @@ public class ContactIT {
     @Test
     public void saveContactTest() {
 
-        Contact contact = Contact.builder()//TODO look into  cascade type merge vs merge type all
+        Contact contact = Contact.builder()
                 .company(getTestCompany())
                 .name("quint").build();
-
-        ResponseEntity<List<Company>> results1 = restTemplate.exchange("http://localhost:" + port + "/api/company/list",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>(){});
 
         ResponseEntity<String> responseEntity = this.restTemplate
                 .postForEntity("http://localhost:" + port + "/api/contact/save", contact, String.class);
@@ -148,7 +143,8 @@ public class ContactIT {
                 new ParameterizedTypeReference<>(){});
 
         List<Contact> resultBody = results.getBody();
-        contact.setId(Long.valueOf(resultBody.size()));
+        assert resultBody != null;
+        contact.setId((long) resultBody.size());
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
         assertThat(resultBody.get(resultBody.size() - 1)).usingRecursiveComparison().isEqualTo(contact);
@@ -167,7 +163,8 @@ public class ContactIT {
                 new ParameterizedTypeReference<>(){});
 
         List<Contact> resultBody = results.getBody();
-        contact.setId(Long.valueOf(resultBody.size()));
+        assert resultBody != null;
+        contact.setId((long) resultBody.size());
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
         assertThat(resultBody.get(resultBody.size() - 1)).usingRecursiveComparison().isEqualTo(contact);
@@ -192,6 +189,7 @@ public class ContactIT {
                 });
 
         List<Contact> resultBody = results.getBody();
+        assert resultBody != null;
         int bodySize = resultBody.size();
         contacts.get(0).setId((long) (bodySize - 2));
         contacts.get(0).setCompany(getTestCompany());

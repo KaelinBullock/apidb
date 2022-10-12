@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/shipment")
@@ -38,7 +37,6 @@ public class ShipmentController {
     }
 
 
-    //TODO do not allow users to submit a id.  Create a separate function for update
     @PostMapping("/save")
     public void save(@RequestBody Shipment shipment) {
         shipmentService.save(shipment);

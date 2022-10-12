@@ -14,7 +14,7 @@ import java.util.Optional;
 @Slf4j
 public class LocationController {
 
-    LocationService locationService;
+    final LocationService locationService;
 
     public LocationController(LocationService locationService) {
         this.locationService = locationService;
@@ -32,7 +32,7 @@ public class LocationController {
 
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody Location location) {
+    public ResponseEntity<String> save(@RequestBody Location location) {
         HttpHeaders headers = new HttpHeaders();
         try {
             locationService.save(location);

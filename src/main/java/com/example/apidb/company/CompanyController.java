@@ -11,7 +11,7 @@ import java.util.Optional;
 @Slf4j
 public class CompanyController {
 
-    CompanyService companyService;
+    final CompanyService companyService;
 
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
@@ -32,7 +32,6 @@ public class CompanyController {
         return companyService.getCompaniesByName(name);
     }
 
-    //TODO add function to save values lowercase, or just ignore case when searching, so you can search without case mattering also make  names unique
     @PostMapping("/save")
     public void save(@RequestBody Company company) {
         companyService.save(company);

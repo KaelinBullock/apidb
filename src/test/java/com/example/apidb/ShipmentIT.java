@@ -6,7 +6,6 @@ import com.example.apidb.contact.ContactRepository;
 import com.example.apidb.location.*;
 import com.example.apidb.shipment.Shipment;
 import com.example.apidb.shipment.ShipmentRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -30,10 +29,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.example.apidb.TestHelper.getTestContact;
-import static com.example.apidb.TestHelper.mapper;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ShipmentIT {
@@ -54,7 +51,7 @@ public class ShipmentIT {
     private int port;
     @Autowired
     TestRestTemplate restTemplate;
-    HttpHeaders headers = new HttpHeaders();
+    final HttpHeaders headers = new HttpHeaders();
     List<Shipment> shipmentList = new ArrayList<>();
 
     @BeforeEach
@@ -156,7 +153,8 @@ public class ShipmentIT {
                 });
 
         List<Shipment> resultBody = results.getBody();
-        shipment.setId(Long.valueOf(resultBody.size()));
+        assert resultBody != null;
+        shipment.setId((long) resultBody.size());
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
         assertThat(resultBody.get(resultBody.size() - 1)).usingRecursiveComparison().isEqualTo(shipment);
@@ -178,7 +176,7 @@ public class ShipmentIT {
                 });
 
         List<Shipment> resultBody = results.getBody();
-        shipment.setId(Long.valueOf(resultBody.size()));
+        shipment.setId((long) resultBody.size());
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(HttpStatus.OK, results.getStatusCode());
         assertThat(resultBody.get(resultBody.size() - 1)).usingRecursiveComparison().isEqualTo(shipment);

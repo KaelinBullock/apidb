@@ -1,8 +1,5 @@
 package com.example.apidb.location;
 
-import com.example.apidb.location.Location;
-import com.example.apidb.location.LocationRepository;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

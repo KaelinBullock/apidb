@@ -5,7 +5,6 @@ import com.example.apidb.contact.ContactRepository;
 import com.example.apidb.shipment.ShipmentRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LocationIT {
@@ -48,9 +47,9 @@ public class LocationIT {
 
     @LocalServerPort
     private int port;
-    HttpHeaders headers = new HttpHeaders();
+    final HttpHeaders headers = new HttpHeaders();
+    final ObjectMapper mapper = new ObjectMapper();
     List<Location> locationList = new ArrayList<>();
-    ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
     public void setup() {
@@ -88,7 +87,7 @@ public class LocationIT {
 
         assertNotNull(results);
         assertEquals(HttpStatus.OK, results.getStatusCode());
-        assertTrue(!results.getBody().isEmpty());
+        assertFalse(results.getBody().isEmpty());
     }
 
     @Test
@@ -160,7 +159,7 @@ public class LocationIT {
                 .postForEntity("http://localhost:" + port + "/api/location/save", request, String.class);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
-        Assertions.assertTrue(responseEntity.getBody().contains("Unable to save location error:"));
+        assertTrue(responseEntity.getBody().contains("Unable to save location error:"));
     }
 
     @Test

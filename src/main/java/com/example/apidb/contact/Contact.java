@@ -1,13 +1,12 @@
 package com.example.apidb.contact;
 
 import com.example.apidb.company.Company;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 @Builder

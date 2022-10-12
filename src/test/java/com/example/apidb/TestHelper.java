@@ -11,15 +11,13 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import static java.lang.Long.*;
-
 @Configuration
 @TestPropertySource("application.properties")
 @EnableTransactionManagement
 @ActiveProfiles("test")
 public class TestHelper {
 
-    static ObjectMapper mapper = new ObjectMapper()
+    static final ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule());
 
     TestHelper() {

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Slf4j
 public class ContactController {
 
-    ContactService contactService;
+    final ContactService contactService;
 
     public ContactController(ContactService contactService) {
         this.contactService = contactService;
