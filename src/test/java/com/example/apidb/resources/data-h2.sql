@@ -1,63 +1,63 @@
 --Insert locations---------------
-INSERT INTO locations(id,
+INSERT INTO locations(
     name, street, suite, city,
     state, zipcode, time_zone,
     location_type, lat, lon)
-VALUES (99, 'USA place','The street', '656', 'Big city',
+VALUES ( 'USA place','The street', '656', 'Big city',
         'Big state','338487', 'CST',
         'BUSINESS', 23.23, 23.23);
 
-INSERT INTO locations(id,
+INSERT INTO locations(
     name, street, suite, city,
     state, zipcode, time_zone,
     location_type, lat, lon)
-VALUES (89, 'USA place','The street', '656', 'Big city',
+VALUES ( 'USA place','The street', '656', 'Big city',
         'Big state','338487', 'CST',
         'BUSINESS', 23.23, 23.23);
 
-INSERT INTO locations(id,
+INSERT INTO locations(
     name, street, suite, city,
     state, zipcode, time_zone,
     location_type, lat, lon)
-VALUES (69, 'USA place','The street', '656', 'Big city',
+VALUES ( 'USA place','The street', '656', 'Big city',
         'Big state','338487', 'CST',
         'BUSINESS', 23.23, 23.23);
 
 --Insert Companies---------------
-INSERT INTO companies(id,
-    company_name, location_id)
-VALUES (99, 'Big Company', 99);
-
-INSERT INTO companies(id,
-    company_name, location_id)
-VALUES (89, 'Big Company', 89);
-
-INSERT INTO companies(id,
-    company_name, location_id)
-VALUES (69, 'Big Company', 69);
+--INSERT INTO companies(
+--    company_name, location_id)
+--VALUES ('Big Company', 1);
+--
+--INSERT INTO companies(
+--    company_name, location_id)
+--VALUES ('Big Company', 2);
+--
+--INSERT INTO companies(
+--    company_name, location_id)
+--VALUES ('Big Company', 3);
 
 --Insert Contacts---------------
-INSERT INTO contacts(id,
-    name, company_id)
-VALUES (99, 'Jarule', 99);
-
-INSERT INTO contacts(id,
-    name, company_id)
-VALUES (89, 'Mark Anthony', 89);
-
-INSERT INTO contacts(id,
-    name, company_id)
-VALUES (69, 'The guy from the gas station', 69);
+--INSERT INTO contacts(
+--    name, company_id)
+--VALUES ('Jarule', 1);
+--
+--INSERT INTO contacts(
+--    name, company_id)
+--VALUES ('Mark Anthony', 2);
+--
+--INSERT INTO contacts(
+--    name, company_id)
+--VALUES ('The guy from the gas station', 3);
 
 --Insert Shipments---------------
-INSERT INTO shipments(id,
-    creation_date, delivery_date, contact_id)
-VALUES (99, '2022-11-11', '2022-11-11', 99);
-
-INSERT INTO shipments(id,
-    creation_date, delivery_date, contact_id)
-VALUES (89, '2022-11-11', '2022-11-11', 89);
-
-INSERT INTO shipments(id,
-    creation_date, delivery_date, contact_id)
-VALUES (69, '2022-11-11', '2022-11-11', 69);
+--INSERT INTO shipments(
+--    creation_date, delivery_date, contact_id)
+--VALUES ('2022-11-11', '2022-11-11', 1);
+--
+--INSERT INTO shipments(
+--    creation_date, delivery_date, contact_id)
+--VALUES ('2022-11-11', '2022-11-11', 2);
+--
+--INSERT INTO shipments(
+--    creation_date, delivery_date, contact_id)
+--VALUES ('2022-11-11', '2022-11-11', 3);
