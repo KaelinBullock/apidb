@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/company")
 @Slf4j
@@ -22,6 +23,7 @@ public class CompanyController {
         return companyService.getCompany(id);
     }
 
+    @CrossOrigin
     @GetMapping("/list")
     public Iterable<Company> getCompanies() {
         return companyService.getCompanies();

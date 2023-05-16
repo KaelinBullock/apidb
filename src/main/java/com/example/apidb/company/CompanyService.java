@@ -25,7 +25,7 @@ public class CompanyService {
 
     public Optional<Company> getCompany(Long id) {
         return companyRepository.findById(id);
-    }
+    }//TODO if a new location is sent in save it
 
     public void save(Company company) {
         companyRepository.save(company);

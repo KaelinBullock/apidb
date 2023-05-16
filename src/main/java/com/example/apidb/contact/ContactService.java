@@ -30,7 +30,7 @@ public class ContactService {
         return contactRepository.getContactByCompanyId(companyId);
     }
 
-    public void save(Contact contact) {
+    public void save(Contact contact) {//TODO if a new company is sent in create it
         contactRepository.save(contact);
     }
 

@@ -16,7 +16,8 @@ public class ShipmentRepository {
 
     @Transactional
     public void saveShipment(Shipment shipment) {
-        Long contactId = shipment.getContact() != null ? shipment.getContact().getId() : null;
+        Long contactId = shipment.getContact() != null ? shipment.getContact().getId() : null;//TODO if id is null and there is data then you should save a new contact
+
         entityManager.createNativeQuery("INSERT INTO shipments (id, creation_date, delivery_date, " +
                         "contact_id) VALUES (?,?,?,?)")
                 .setParameter(1, findLastEntry())
