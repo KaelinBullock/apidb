@@ -23,6 +23,10 @@ public class LocationService {
         return locationRepository.findById(id);
     }
 
+    public Iterable<Location> getLocationByName(String name) {
+        return locationRepository.getLocationsByName(name);
+    }
+
     public void save(Location location) {
         locationRepository.save(location);
     }

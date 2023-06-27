@@ -17,6 +17,8 @@ public class Shipment {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long id;
+    @Column(name="name")
+    private String name;
     @Column(name="creation_date")
     private LocalDate creationDate;
     @Column(name="delivery_date")

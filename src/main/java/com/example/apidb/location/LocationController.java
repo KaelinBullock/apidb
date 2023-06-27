@@ -12,6 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/location")
 @Slf4j
+@CrossOrigin
 public class LocationController {
 
     final LocationService locationService;
@@ -23,6 +24,11 @@ public class LocationController {
     @GetMapping()
     public Optional<Location> getLocation(@RequestParam Long id) {
         return locationService.getLocation(id);
+    }
+
+    @GetMapping("/getLocationsByName")
+    public Iterable<Location> getCompaniesByName(@RequestParam String name) {
+        return locationService.getLocationByName(name);
     }
 
     @GetMapping("/list")

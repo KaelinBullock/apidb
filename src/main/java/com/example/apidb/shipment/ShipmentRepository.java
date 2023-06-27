@@ -16,14 +16,15 @@ public class ShipmentRepository {
 
     @Transactional
     public void saveShipment(Shipment shipment) {
-        Long contactId = shipment.getContact() != null ? shipment.getContact().getId() : null;//TODO if id is null and there is data then you should save a new contact
+        Long contactId = shipment.getContact() != null ? shipment.getContact().getId() : null;
 
-        entityManager.createNativeQuery("INSERT INTO shipments (id, creation_date, delivery_date, " +
-                        "contact_id) VALUES (?,?,?,?)")
+        entityManager.createNativeQuery("INSERT INTO shipments (id, name, creation_date, delivery_date, " +
+                        "contact_id) VALUES (?,?,?,?,?)")
                 .setParameter(1, findLastEntry())
-                .setParameter(2, shipment.getCreationDate())
-                .setParameter(3, shipment.getDeliveryDate())
-                .setParameter(4, contactId)
+                .setParameter(2, shipment.getName())
+                .setParameter(3, shipment.getCreationDate())
+                .setParameter(4, shipment.getDeliveryDate())
+                .setParameter(5, contactId)
                 .executeUpdate();
     }
 

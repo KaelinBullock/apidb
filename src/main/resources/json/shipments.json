@@ -1,6 +1,7 @@
 [
   {
     "id": 2,
+    "name": "Colorado Shipment",
     "creationDate": "2014-12-20T02:30",
     "deliveryDate": "2014-12-20T02:30",
     "contact": {
@@ -9,6 +10,7 @@
   },
   {
     "id": 3,
+    "name": "Kansas Shipment",
     "creationDate": "2015-11-20T02:30",
     "deliveryDate": "2015-11-20T02:30",
     "contact": {
@@ -17,6 +19,7 @@
   },
   {
     "id": 4,
+    "name": "Memphis Shipment",
     "creationDate": "2016-08-20T02:30",
     "deliveryDate": "2016-08-20T02:30",
     "contact": {

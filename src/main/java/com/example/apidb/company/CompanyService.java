@@ -1,5 +1,7 @@
 package com.example.apidb.company;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,12 +10,8 @@ import java.util.Optional;
 @Service
 public class CompanyService {
 
-    private final CompanyRepository companyRepository;
-
-
-    public CompanyService(CompanyRepository companyRepository) {
-        this.companyRepository = companyRepository;
-    }
+    @Autowired
+    private CompanyRepository companyRepository;
 
     public Iterable<Company> getCompanies() {
         return companyRepository.findAll();
@@ -25,7 +23,7 @@ public class CompanyService {
 
     public Optional<Company> getCompany(Long id) {
         return companyRepository.findById(id);
-    }//TODO if a new location is sent in save it
+    }
 
     public void save(Company company) {
         companyRepository.save(company);

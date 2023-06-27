@@ -1,6 +1,6 @@
 --Insert locations---------------
 INSERT INTO locations(
-    name, street, suite, city,
+    location_name, street, suite, city,
     state, zipcode, time_zone,
     location_type, lat, lon)
 VALUES ( 'USA place','The street', '656', 'Big city',
@@ -8,18 +8,18 @@ VALUES ( 'USA place','The street', '656', 'Big city',
         'BUSINESS', 23.23, 23.23);
 
 INSERT INTO locations(
-    name, street, suite, city,
+    location_name, street, suite, city,
     state, zipcode, time_zone,
     location_type, lat, lon)
-VALUES ( 'USA place','The street', '656', 'Big city',
+VALUES ( 'The big house','The street', '656', 'Big city',
         'Big state','338487', 'CST',
         'BUSINESS', 23.23, 23.23);
 
 INSERT INTO locations(
-    name, street, suite, city,
+    location_name, street, suite, city,
     state, zipcode, time_zone,
     location_type, lat, lon)
-VALUES ( 'USA place','The street', '656', 'Big city',
+VALUES ( 'Another Land','The street', '656', 'Big city',
         'Big state','338487', 'CST',
         'BUSINESS', 23.23, 23.23);
 

@@ -24,6 +24,7 @@ public class ContactController {
     }
     @GetMapping("/list")
     public Iterable<Contact> getContacts() {
+        log.info("Get Contacts");
         return contactService.getContacts();
     }
 

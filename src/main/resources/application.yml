@@ -35,3 +35,12 @@ eureka:
 #    jwt-disabled: true
 #    jwt-secret: secret
 #    jwt-validity: 20
+
+#server:
+#  ssl:
+#    key-alias: spring-https
+#    key-store: classpath:javaj.jks
+#    key-store-type: JKS
+#    key-store-password: password
+#server:
+#  port: 80
